@@ -4,9 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
+<script>/* valt utseende (ljust/mörkt) tillämpas före första målningen */
+try{var _h=document.documentElement;window.__ht=_h.getAttribute('data-theme');var _p=JSON.parse(localStorage.getItem('nettokalorier-prefs-v1')||'null');
+if(_p&&(_p.theme==='light'||_p.theme==='dark')){_h.setAttribute('data-theme',_p.theme);document.querySelector('meta[name="color-scheme"]').setAttribute('content',_p.theme)}}catch(e){}</script>
 <style>
 /* målas allra först: rätt bakgrund redan innan resten av stilarna är inlästa */
-html{background:#f3f6f8}
+html{background:#e3ecee}
 @media (prefers-color-scheme:dark){html:not([data-theme="light"]){background:#0f1519}}
 html[data-theme="dark"]{background:#0f1519}
 html.rl body{animation:rlin .35s ease-out}
@@ -29,10 +32,10 @@ html.rl body{animation:rlin .35s ease-out}
 })();
 </script>
 <style>
-:root{--bg:#f3f6f8;--card:#fff;--tx:#14202b;--mut:#5d6b78;--bd:#d9e1e7;--sur:#a16207;--def:#0f6b8c;--zero:#14202b;
+:root{--bg:#e3ecee;--card:#f4f8f8;--fld:#fcfdfd;--tx:#14202b;--mut:#506470;--bd:#c6d5d9;--sur:#a16207;--def:#0f6b8c;--zero:#14202b;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1519;--card:#182027;--tx:#e8eef2;--mut:#93a1ad;--bd:#2a353e;--sur:#e0a526;--def:#5cc0e3;--zero:#e8eef2}}
-:root[data-theme="dark"]{--bg:#0f1519;--card:#182027;--tx:#e8eef2;--mut:#93a1ad;--bd:#2a353e;--sur:#e0a526;--def:#5cc0e3;--zero:#e8eef2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1519;--card:#182027;--fld:#182027;--tx:#e8eef2;--mut:#93a1ad;--bd:#2a353e;--sur:#e0a526;--def:#5cc0e3;--zero:#e8eef2}}
+:root[data-theme="dark"]{--bg:#0f1519;--card:#182027;--fld:#182027;--tx:#e8eef2;--mut:#93a1ad;--bd:#2a353e;--sur:#e0a526;--def:#5cc0e3;--zero:#e8eef2}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 input{caret-color:color-mix(in srgb,var(--tx) 30%,var(--card))}
 ::selection{background:color-mix(in srgb,var(--tx) 14%,transparent)}
@@ -47,8 +50,43 @@ h1{font-size:1.1rem;font-weight:700;margin:0;letter-spacing:.01em}
 .top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 14px}
 .gear{width:44px;height:44px;min-height:0;margin:-8px -10px -8px 0;padding:0;border:0;border-radius:12px;background:transparent;color:var(--mut);display:flex;align-items:center;justify-content:center;cursor:pointer}
 .gear:active{background:color-mix(in srgb,var(--tx) 10%,transparent)}
-#ov4 .pop{max-width:560px;height:100%;padding:20px}
+#ov4{padding-left:8px;padding-right:8px}
+#ov4 .pop{max-width:560px;height:100%;padding:20px 16px;background:var(--bg)}
+#ov4 .pop section{margin:12px 0 0;padding:14px 16px;border:1px solid var(--bd);border-radius:14px;background:var(--card)}
+#ov4 .pop h3{font-size:.95rem;font-weight:700;margin:0 0 10px}
+#ov4 .set{margin:0}
+#ov4 .set .wide{grid-column:1/-1}
+#ov4 .tools{top:10px;right:10px}
+#ov4 .pop{padding-bottom:calc(20px + var(--kb,0px))}
+#ov4{--ckd:color-mix(in srgb,var(--tx) 24%,var(--card));--ckm:color-mix(in srgb,var(--ckr) 50%,var(--ckd))}
+#ov4 .tools{color:var(--ckd)}
+#ov5{--dim:.55}
+#ov5 .pop{max-width:420px;height:100%;display:flex;flex-direction:column;padding:18px 16px 12px;background:color-mix(in srgb,var(--bg) 100%,var(--card))}
+#ov5 .pop{touch-action:pan-y}
+#ov5 .pop h3{margin:0 0 10px;padding-right:34px;font-size:1rem}
+#tzq{flex:none;margin:0 0 8px}
+.tzl{flex:1;min-height:0;overflow:auto;margin:0 -6px;padding:0 6px;overscroll-behavior:contain}
+.tzg{font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);padding:12px 4px 4px}
+.tzi{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:8px 10px;border:0;border-radius:8px;background:transparent;text-align:left;font:inherit;color:var(--tx);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tzi:active{background:color-mix(in srgb,var(--tx) 10%,transparent)}
+.tzi small{flex:none;color:var(--mut);font-size:.8rem;font-variant-numeric:tabular-nums}
+.tzi[aria-selected="true"]{background:color-mix(in srgb,var(--tx) 10%,var(--card));font-weight:600}
+.tzn{padding:18px 4px;color:var(--mut);font-size:.9rem}
+.tm{display:flex;align-items:center;justify-content:center;min-height:44px;padding:0 6px;border:1px solid var(--bd);border-radius:8px;background:var(--fld,var(--card))}
+.tm:focus-within{border-color:color-mix(in srgb,var(--tx) 28%,var(--card));box-shadow:0 0 0 3px color-mix(in srgb,var(--tx) 9%,transparent)}
+.tm.bad,.tm.bad:focus-within{border-color:color-mix(in srgb,#d4574f 75%,var(--bd));box-shadow:0 0 0 3px color-mix(in srgb,#d4574f 14%,transparent)}
+.tm .ts{width:1.3rem;min-height:0;margin:0 1px;padding:2px 0 1px;border:0;border-bottom:2px solid color-mix(in srgb,var(--tx) 22%,var(--card));border-radius:0;background:transparent;box-shadow:none;text-align:center;font-size:1.1rem;font-variant-numeric:tabular-nums;caret-color:transparent}
+.tm .ts:focus,.tm .ts:focus-visible{outline:none;box-shadow:none;border-bottom-color:var(--tx)}
+.tm .tc{font-size:1.1rem;color:var(--mut);padding:0 3px 3px}
+.seg{display:flex;border:1px solid var(--bd);border-radius:8px;overflow:hidden}
+.seg button{flex:1;border:0;border-radius:0;background:transparent;padding:9px 6px}
+.seg button+button{border-left:1px solid var(--bd)}
+.seg button[aria-pressed="true"]{background:color-mix(in srgb,var(--tx) 11%,var(--card));font-weight:600}
 #ov4 h2{margin:0;font-size:1.1rem;font-weight:700}
+#ov4 .xfer .xwhere{margin:0 0 10px}
+.rstrow{display:flex;justify-content:flex-end;margin-top:16px}
+#ov4 .ver{margin:18px 0 0}
+#ov4 .xfer .btns{gap:6px;justify-content:flex-start;margin-top:0}#ov4 .xfer .btns .btn,#ov4 .xfer .btns button{padding-left:9px;padding-right:9px}
 .hero{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:38px 18px 20px}
 .infolink{position:absolute;top:8px;right:10px;background:none;border:0;padding:6px;min-height:0;font-size:.8rem;color:var(--tx);opacity:.8;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--tx) 38%,transparent);text-decoration-thickness:1px;text-underline-offset:3px;cursor:pointer}
 .big{font-size:3.4rem;font-weight:700;line-height:1;margin:2px 0 4px}
@@ -167,7 +205,7 @@ h1{font-size:1.1rem;font-weight:700;margin:0;letter-spacing:.01em}
 .hbody.more:not(.full) #rows{padding-bottom:56px}
 .hbody.full #rows{max-height:var(--fullh,292px)}
 .hbody.full .fade{position:static;width:100%;height:auto;background:none;padding:12px 0;align-items:center;border-top:1px solid var(--bd)}
-.set input.dt{width:0;flex:1 1 0;min-width:6.5rem;cursor:pointer;caret-color:transparent;-webkit-tap-highlight-color:transparent}
+.set input.dt{width:0;flex:1 1 0;min-width:6.5rem;text-overflow:ellipsis;cursor:pointer;caret-color:transparent;-webkit-tap-highlight-color:transparent}
 .set input.dt:focus,.set input.dt:focus-visible{outline:none;border-color:var(--bd);box-shadow:none}
 button:focus:not(:focus-visible){outline:none}
 #reset{background:color-mix(in srgb,#000 17%,var(--card));border-color:color-mix(in srgb,#000 30%,var(--bd));color:color-mix(in srgb,var(--tx) 70%,var(--card))}
@@ -195,7 +233,7 @@ button:focus:not(:focus-visible){outline:none}
 [hidden]{display:none!important}
 .rst{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .danger{background:var(--red);border-color:var(--red);color:var(--bg);font-weight:500}
-.xfer,.cfg{margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}.xfer h2,.cfg h2{font-size:.95rem;font-weight:700;margin:0 0 10px}.cfg .set{margin:0}.cfg .hint{font-style:italic}.xfer .btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.xfer,.cfg{margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}.cfg .set{margin:0}.cfg .hint{font-style:italic}.xfer .btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .ver{margin:30px 0 4px;text-align:center;font-size:.72rem;color:color-mix(in srgb,var(--tx) 40%,var(--card))}
 .xwhere[hidden]{display:none}
 .xwhere .lnk:first-child{margin-left:0}
@@ -206,7 +244,7 @@ button:focus:not(:focus-visible){outline:none}
 .info p{margin:0 0 8px}.info p:last-child{margin:0}
 .set{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin:16px 0}
 .set label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
-input{width:100%;font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:9px 10px;min-height:44px}
+input{width:100%;font:inherit;color:var(--tx);background:var(--fld,var(--card));border:1px solid var(--bd);border-radius:8px;padding:9px 10px;min-height:44px}
 input:focus,input:focus-visible{outline:none;border-color:color-mix(in srgb,var(--tx) 28%,var(--card));box-shadow:0 0 0 3px color-mix(in srgb,var(--tx) 9%,transparent)}
 /* för högt/lågt värde som kapats: bara en rödaktig ram (ingen text, ingen understrykning). Försvinner när man ändrar värdet eller återvänder till rutan */
 input.bad,input.bad:focus,input.bad:focus-visible{border-color:color-mix(in srgb,#d4574f 75%,var(--bd));box-shadow:0 0 0 3px color-mix(in srgb,#d4574f 14%,transparent)}
@@ -274,29 +312,6 @@ summary:focus-visible{outline:2px solid color-mix(in srgb,var(--tx) 30%,transpar
   </div>
 </section>
 
-<section class="cfg">
-  <h2>Inställningar</h2>
-  <div class="set">
-    <div><label for="start">Startdatum:</label><div class="fld"><input id="start" class="dt" type="text" readonly inputmode="none" aria-haspopup="dialog"><button class="fu" data-f="start" data-w="start" type="button" hidden aria-label="Ångra senaste ändring av startdatum"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button></div></div>
-    <div></div>
-    <div class="pair">
-    <div><label for="need">Dagsbehov (kcal)</label><div class="fld"><input id="need" type="number" inputmode="numeric" min="0" step="10"><button class="fu" data-f="need" data-w="need" type="button" hidden aria-label="Ångra senaste ändring av dagsbehov"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button></div></div>
-    <div><label for="from">Nytt behov från:</label><div class="fld"><input id="from" class="dt" type="text" readonly inputmode="none" aria-haspopup="dialog"><button class="fu" data-f="need" data-w="from" type="button" hidden aria-label="Ångra senaste ändring av behovet"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button></div></div>
-    <p class="hint">Tidigare dagar behåller sitt gamla behov om du väljer ett senare datum.</p>
-    </div>
-  </div>
-  <div class="tools" id="tools"><button class="svd" id="svd" type="button" aria-label="Inget sparat nyss"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 12.8l4 4L18.5 8"/></svg><small id="svt"></small></button></div>
-</section>
-
-<section class="xfer">
-  <h2>Datahantering</h2>
-  <p class="note">All data sparas lokalt i webbläsaren på enheten. Vill du flytta historik till en ny enhet finns alternativ för exportering nedan.</p>
-  <div class="btns"><button id="exp">Exportera</button><label class="btn" id="imp" for="xf" tabindex="0" role="button">Importera</label><input type="file" id="xf" class="vh" tabindex="-1"><div class="rst" style="margin-left:auto"><button id="reset">Rensa data</button><div id="rc" class="rst" hidden><span>Rensa all data?</span><button id="rno">Avbryt</button><button id="ryes" class="danger">Ja, rensa</button></div></div></div>
-  <p class="hint xwhere" id="xwhere" hidden></p>
-  <p class="hint" id="xlast"></p>
-  <p class="hint" id="xmsg" role="status"></p>
-</section>
-<footer class="ver" id="ver"></footer>
 </main>
 <div id="ptr" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 12a8.5 8.5 0 1 1-2.6-6.1"/><path d="M20.5 3.5v5h-5"/></svg></div>
 <div class="ov" id="ov" hidden>
@@ -337,6 +352,51 @@ summary:focus-visible{outline:2px solid color-mix(in srgb,var(--tx) 30%,transpar
   <div class="pop" role="dialog" aria-modal="true" aria-labelledby="setTitle">
     <button class="xclose" id="ov4close" type="button" aria-label="Stäng"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     <h2 id="setTitle">Inställningar</h2>
+<section class="cfg">
+  <h3>Grundläggande</h3>
+  <div class="set">
+    <div><label for="start">Startdatum:</label><div class="fld"><input id="start" class="dt" type="text" readonly inputmode="none" aria-haspopup="dialog"><button class="fu" data-f="start" data-w="start" type="button" hidden aria-label="Ångra senaste ändring av startdatum"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button></div></div>
+    <div></div>
+    <div class="pair">
+    <div><label for="need">Dagsbehov (kcal)</label><div class="fld"><input id="need" type="number" inputmode="numeric" min="0" step="10"><button class="fu" data-f="need" data-w="need" type="button" hidden aria-label="Ångra senaste ändring av dagsbehov"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button></div></div>
+    <div><label for="from">Nytt behov från:</label><div class="fld"><input id="from" class="dt" type="text" readonly inputmode="none" aria-haspopup="dialog"><button class="fu" data-f="need" data-w="from" type="button" hidden aria-label="Ångra senaste ändring av behovet"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button></div></div>
+    <p class="hint">Tidigare dagar behåller sitt gamla behov om du väljer ett senare datum.</p>
+    </div>
+  </div>
+  <div class="tools" id="tools"><button class="svd" id="svd" type="button" aria-label="Inget sparat nyss"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 12.8l4 4L18.5 8"/></svg><small id="svt"></small></button></div>
+</section>
+
+<section class="pref">
+  <h3>Preferenser</h3>
+  <div class="set"><div class="wide"><label id="thl">Utseende</label><div class="seg" role="group" aria-labelledby="thl"><button type="button" data-v="auto" aria-pressed="false">Auto</button><button type="button" data-v="light" aria-pressed="false">Ljust</button><button type="button" data-v="dark" aria-pressed="false">Mörkt</button></div></div></div>
+</section>
+
+<section class="sys">
+  <h3>System &amp; tid</h3>
+  <div class="set">
+    <div><label for="tz">Tidszon</label><div class="fld"><input id="tz" class="dt" type="text" readonly inputmode="none" aria-haspopup="dialog"></div></div>
+    <div><label id="cutl">Dygnsbrytning</label><div class="tm" id="cut" role="group" aria-labelledby="cutl"><input class="ts" type="text" inputmode="numeric" autocomplete="off" aria-label="Timme, tiotal"><input class="ts" type="text" inputmode="numeric" autocomplete="off" aria-label="Timme, ental"><span class="tc" aria-hidden="true">:</span><input class="ts" type="text" inputmode="numeric" autocomplete="off" aria-label="Minut, tiotal"><input class="ts" type="text" inputmode="numeric" autocomplete="off" aria-label="Minut, ental"></div></div>
+  </div>
+</section>
+
+<section class="xfer">
+  <h3>Datahantering</h3>
+  <p class="note">All data sparas lokalt i webbläsaren på enheten. Vill du flytta historik till en ny enhet finns alternativ för exportering nedan.</p>
+  <p class="hint xwhere" id="xwhere" hidden></p>
+  <div class="btns"><button id="exp">Exportera</button><label class="btn" id="imp" for="xf" tabindex="0" role="button">Importera</label><input type="file" id="xf" class="vh" tabindex="-1"></div>
+  <p class="hint" id="xlast"></p>
+  <p class="hint" id="xmsg" role="status"></p>
+  <div class="rstrow"><div class="rst"><button id="reset">Rensa data</button><div id="rc" class="rst" hidden><span>Rensa all data?</span><button id="rno">Avbryt</button><button id="ryes" class="danger">Ja, rensa</button></div></div></div>
+</section>
+<footer class="ver" id="ver"></footer>
+  </div>
+</div>
+<div class="ov" id="ov5" hidden>
+  <div class="pop" role="dialog" aria-modal="true" aria-labelledby="tzt">
+    <button class="xclose" id="ov5close" type="button" aria-label="Stäng"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <h3 id="tzt">Tidszon</h3>
+    <input id="tzq" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Sök" aria-label="Sök tidszon">
+    <div class="tzl" id="tzl" role="listbox"></div>
   </div>
 </div>
 <div class="ov" id="ov3" hidden>
@@ -352,18 +412,40 @@ summary:focus-visible{outline:2px solid color-mix(in srgb,var(--tx) 30%,transpar
 // APPENS VERSION (visas längst ned). Regel: 0.x = ofärdig version under arbete. Andra siffran höjs ett steg varje gång en ny version
 // publiceras på GitHub (0.1 -> 0.2 -> 0.3 ...), inte vid varje ändring under arbetet. 1.0 används först den dag appen anses färdig.
 // Efter 1.0: 1.1, 1.2 för mindre uppdateringar och 2.0 för stora förändringar.
-const APP_VERSION='0.2';
+const APP_VERSION='0.3';
 const KEY='nettokalorier-v1';
 const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const parse=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
 const $=id=>document.getElementById(id);
-const todayIso=()=>iso(new Date());
+// Inställningar som hör till enheten (inte till exporterad data): tidszon, dygnsbrytning, utseende
+const PK='nettokalorier-prefs-v1';
+const PREFS={tz:'',cut:180,theme:'auto'};   // tz '' = enhetens tidszon · cut = minuter efter midnatt då nytt dygn börjar · theme auto|light|dark
+try{const o=JSON.parse(localStorage.getItem(PK)||'null');if(o&&typeof o==='object'){
+  if(typeof o.tz==='string')PREFS.tz=o.tz;
+  const c=Math.round(+o.cut);if(c>=0&&c<1440)PREFS.cut=c;
+  if(o.theme==='light'||o.theme==='dark')PREFS.theme=o.theme}}catch(e){}
+const savePrefs=()=>{try{localStorage.setItem(PK,JSON.stringify(PREFS))}catch(e){}};
+const validTz=z=>{try{new Intl.DateTimeFormat('sv-SE',{timeZone:z});return true}catch(e){return false}};
+if(PREFS.tz&&!validTz(PREFS.tz))PREFS.tz='';
+const WF={};
+// "Väggklockan" i vald tidszon som UTC-kodade millisekunder (så att datumräkning slipper sommartids-krångel)
+function wall(ts){
+  if(PREFS.tz){try{
+    const f=WF[PREFS.tz]||(WF[PREFS.tz]=new Intl.DateTimeFormat('en-GB',{timeZone:PREFS.tz,hourCycle:'h23',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',second:'numeric'}));
+    const p={};f.formatToParts(new Date(ts)).forEach(x=>{p[x.type]=+x.value});
+    return Date.UTC(p.year,p.month-1,p.day,p.hour%24,p.minute,p.second)}catch(e){}}
+  const d=new Date(ts);return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate(),d.getHours(),d.getMinutes(),d.getSeconds());
+}
+const isoU=ms=>{const d=new Date(ms);return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0')+'-'+String(d.getUTCDate()).padStart(2,'0')};
+const todayIso=()=>isoU(wall(Date.now())-PREFS.cut*60000);   // appens "idag": väggklocka minus dygnsbrytningen
+const tzOpt=()=>PREFS.tz?{timeZone:PREFS.tz}:{};
+const fmtHM=ts=>new Date(ts).toLocaleTimeString('sv-SE',Object.assign({hour:'2-digit',minute:'2-digit'},tzOpt()));
 let curToday=todayIso();
 
 function load(){
   try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&o.start&&Array.isArray(o.needs)&&o.needs.length&&o.intake)return o}}catch(e){}
   // Första gången appen öppnas: börja 10 dagar bakåt med 2000 kcal i behov, så att vyn inte är tom.
-  const d=new Date();d.setDate(d.getDate()-10);
+  const d=parse(todayIso());d.setDate(d.getDate()-10);
   const fresh={start:iso(d),needs:[{from:'',kcal:2000}],intake:{}};
   try{localStorage.setItem(KEY,JSON.stringify(fresh))}catch(e){}
   return fresh;
@@ -432,7 +514,15 @@ function makeRow(day,isToday){
   return {day,el,inp,cum,dot};
 }
 
-let foff=0,fo=null;
+let foff=0,fo=null,foffAuto=true;
+// Startvy: är det högst DEFHRS timmar kvar till dygnsbrytningen visas "Idag" (man loggar kvällens intag),
+// annars "Igår" först (man loggar sannolikt gårdagens intag), och "Idag" ligger då på knappen bredvid.
+const DEFHRS=10;
+function defaultFoff(){
+  if(maxOff()<1)return 0;
+  const w=wall(Date.now())-PREFS.cut*60000,into=((w%86400000)+86400000)%86400000;
+  return (86400000-into)<=DEFHRS*3600000?0:1;
+}
 const ARR={l:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>',
            r:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg>'};
 const NVA={l:'<svg width="10" height="28" viewBox="0 0 10 28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5L3.12 13.2Q2.75 14 3.12 14.8L8 25.5"/></svg>',
@@ -459,10 +549,10 @@ function buildFocus(){
   intakeInput(inp,fDay,syncSuf);
   w.append(inp,suf);
   el.append(tg,dcell,w);
-  tg.onclick=()=>{foff=foff===0?1:0;refreshFocus();calc()};
-  pv.onclick=()=>{if(foff<maxOff()){foff++;refreshFocus();calc()}};
-  nx.onclick=()=>{if(foff>0){foff--;refreshFocus();calc()}};
-  ctr.onclick=()=>calOpen({sel:fDay(),min:st.start,max:curToday,dots:true,pick:day=>{foff=Math.round((parse(curToday)-parse(day))/86400000);refreshFocus();calc()}});
+  tg.onclick=()=>{foffAuto=false;foff=foff===0?1:0;refreshFocus();calc()};
+  pv.onclick=()=>{if(foff<maxOff()){foffAuto=false;foff++;refreshFocus();calc()}};
+  nx.onclick=()=>{if(foff>0){foffAuto=false;foff--;refreshFocus();calc()}};
+  ctr.onclick=()=>calOpen({sel:fDay(),min:st.start,max:curToday,dots:true,pick:day=>{foffAuto=false;foff=Math.round((parse(curToday)-parse(day))/86400000);refreshFocus();calc()}});
   $('today').appendChild(el);
   fo={el,tg,dayEl,smallEl,pv,nx,inp,suf,cum:document.createElement('div')};
   todayRow=fo;
@@ -562,12 +652,11 @@ function calc(){
 
 // Ångra för inställningar: per fält, upp till 20 steg totalt, syns i fältet så länge ändringen är "ny"
 const UNK='nettokalorier-undo-v2',UMAX=20,UTTL=24*3600*1000;
-let umeta={saved:0,act:0,locked:false,showAll:false,stack:[]},hotT=null,flT=null;
+let umeta={saved:0,act:0,sact:0,locked:false,showAll:false,stack:[]},hotT=null,flT=null;
 function uprune(){const lim=Date.now()-UTTL;umeta.stack=umeta.stack.filter(x=>x&&x.t>lim&&(x.f==='start'&&x.start||x.f==='need'&&Array.isArray(x.needs)));if(umeta.saved<lim)umeta.saved=0}
-function uload(){try{const o=JSON.parse(localStorage.getItem(UNK)||'null');if(o&&Array.isArray(o.stack))umeta={saved:+o.saved||0,act:+o.act||0,locked:!!o.locked,showAll:!!o.showAll,stack:o.stack}}catch(e){}uprune()}
+function uload(){try{const o=JSON.parse(localStorage.getItem(UNK)||'null');if(o&&Array.isArray(o.stack))umeta={saved:+o.saved||0,act:+o.act||0,sact:+o.sact||0,locked:!!o.locked,showAll:!!o.showAll,stack:o.stack}}catch(e){}uprune()}
 function usave(){try{localStorage.setItem(UNK,JSON.stringify(umeta))}catch(e){}}
-const DAYBREAK=0; // timme då dygnet byter (förberett för en framtida inställning)
-function hotEnd(t){const d=new Date(t),nb=new Date(d.getFullYear(),d.getMonth(),d.getDate(),DAYBREAK);if(nb<=d)nb.setDate(nb.getDate()+1);return Math.max(t+4*3600*1000,nb.getTime())}
+function hotEnd(t){const w=wall(t)-PREFS.cut*60000,nb=(Math.floor(w/86400000)+1)*86400000;return Math.max(t+4*3600*1000,t+(nb-w))}   // fyra timmar eller till nästa dygnsbrytning, det som är senast
 const live=f=>umeta.stack.filter(x=>x.f===f&&Date.now()<hotEnd(x.t));
 const shown=f=>live(f).filter(x=>umeta.showAll||!x.c);
 const LITMS=260000; // hela förloppet i @keyframes ckf
@@ -584,13 +673,13 @@ function drawTools(){
     b.hidden=!on;
     b.parentElement.classList.toggle('hasu',on);
   });
-  const t=umeta.saved?new Date(umeta.saved):null,hm=t?t.toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'}):'';
+  const hm=umeta.saved?fmtHM(umeta.saved):'';
   $('svt').textContent=hm;
   $('svd').setAttribute('aria-label',anyLive?(show?'Tryck för att dölja ångra-knapparna':'Tryck för att visa ångra-knapparna'):(hm?'Sparat kl. '+hm:'Inget sparat nyss'));
   const hot=!!umeta.saved&&now<hotEnd(umeta.saved);
-  const tl=$('tools');tl.classList.toggle('hot',hot);tl.classList.toggle('ring',show);if(!show)tl.classList.remove('lit');
+  const tl=$('tools');tl.classList.toggle('hot',hot);const sring=!!umeta.sact&&now-umeta.sact<LITMS,ringOn=show||sring;tl.classList.toggle('ring',ringOn);if(!ringOn)tl.classList.remove('lit');
   clearTimeout(hotT);
-  const ends=umeta.stack.map(x=>hotEnd(x.t)).concat(umeta.saved?[hotEnd(umeta.saved)]:[]).filter(e=>e>now);
+  const ends=umeta.stack.map(x=>hotEnd(x.t)).concat(umeta.saved?[hotEnd(umeta.saved)]:[],umeta.sact?[umeta.sact+LITMS]:[]).filter(e=>e>now);
   if(ends.length)hotT=setTimeout(drawTools,Math.min(Math.min(...ends)-now+300,2147483000));
 }
 function unfg(){   // grön bock tonar mjukt till den vanliga (grå) färgen
@@ -600,6 +689,8 @@ function unfg(){   // grön bock tonar mjukt till den vanliga (grå) färgen
   try{b.animate([{color:'#23894c'},{color:to}],{duration:1800,easing:'ease-out'})}catch(e){}
 }
 // ts: tidsstämpel som ska visas vid bocken (utelämnad = nu). Vid ångra skickas tiden för den senaste ändring som fortfarande gäller.
+// Inställningar utan ångra (tidszon, dygnsbrytning): bocken lyser och visar klockslaget, men rör inte ångra-knapparnas läge
+function noteSaved(){const t=Date.now();umeta.saved=t;umeta.sact=t;usave();drawTools();lit()}
 function noteChange(ts){umeta.saved=ts===undefined?Date.now():ts;umeta.act=Date.now();umeta.locked=false;unfg();usave();drawTools();lit()}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)drawTools()});
 // Dagsbehov + "Nytt behov från" som ändras direkt efter varandra (olika fält, inom 45 s) räknas som ETT ångra-steg.
@@ -636,7 +727,7 @@ function applyNeed(w){
   const p=needPending();if(!p)return;
   const k=p.k;let f=p.f;
   pushUndo('need',w);
-  if(f<=st.start)f='';
+  if(f<=st.start&&!st.needs.some(n=>n.from!==''&&n.from<f))f='';   // slå bara ihop till ett enda behov om det inte finns äldre historik att bevara
   st.needs=st.needs.filter(n=>n.from===''?true:n.from<f);
   if(f==='')st.needs=[{from:'',kcal:k}];else st.needs.push({from:f,kcal:k});
   save();calc();
@@ -705,7 +796,7 @@ $('ryes').onclick=()=>{
 };
 
 function init(){
-  curToday=todayIso();vm=curToday.slice(0,7);foff=0;
+  curToday=todayIso();vm=curToday.slice(0,7);foff=defaultFoff();foffAuto=true;
   $('need').value=needFor(curToday);$('need').classList.remove('bad');   // värdet sätts av appen, så en gammal röd markering ska bort
   $('from').value=curToday;
   $('start').max=curToday;$('from').max=curToday;$('start').value=st.start;
@@ -715,13 +806,174 @@ updUndo();
 function checkDay(){
   if(todayIso()!==curToday){
     const ae=document.activeElement;if(ae&&ae.blur)ae.blur();
-    init();
+    init();return;
   }
+  // har användaren inte själv bläddrat följer startvyn tiden på dygnet (se defaultFoff)
+  if(foffAuto&&fo&&document.activeElement!==fo.inp){const d=defaultFoff();if(d!==foff){foff=d;refreshFocus();calc()}}
 }
 setInterval(checkDay,30000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkDay()});
 window.addEventListener('focus',checkDay);
 window.addEventListener('pageshow',checkDay);
+
+// ---- Preferenser och System & tid ----
+const HTMLEL=document.documentElement;
+let hostTheme=window.__ht===undefined?HTMLEL.getAttribute('data-theme'):window.__ht;   // värdet som sidan fick utifrån, används vid "Auto"
+function applyTheme(){
+  const meta=document.querySelector('meta[name="color-scheme"]');
+  if(PREFS.theme==='auto'){hostTheme?HTMLEL.setAttribute('data-theme',hostTheme):HTMLEL.removeAttribute('data-theme');if(meta)meta.setAttribute('content','light dark')}
+  else{HTMLEL.setAttribute('data-theme',PREFS.theme);if(meta)meta.setAttribute('content',PREFS.theme)}
+  document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===PREFS.theme)));
+}
+new MutationObserver(()=>{const v=HTMLEL.getAttribute('data-theme');if(PREFS.theme==='auto')hostTheme=v;else if(v!==PREFS.theme)HTMLEL.setAttribute('data-theme',PREFS.theme)}).observe(HTMLEL,{attributes:true,attributeFilter:['data-theme']});
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{PREFS.theme=b.dataset.v;savePrefs();applyTheme()});
+applyTheme();
+
+function timeChanged(){   // tidszon eller dygnsbrytning ändrad: räkna om "idag"
+  const t=todayIso();
+  if(st.start>t){st.start=t;save()}   // startdatumet kan inte ligga efter dagens datum
+  const ae=document.activeElement;if(ae&&ae.blur&&ae!==document.body)ae.blur();
+  init();showLast();
+}
+const minToHM=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+// Dygnsbrytning: fyra siffror med ett fast kolon emellan. Skriv siffror rakt av; fokus hoppar vidare.
+const cutEl=$('cut'),slots=[...cutEl.querySelectorAll('.ts')];
+const setSlots=m=>{const t=minToHM(m).replace(':','');slots.forEach((e,k)=>e.value=t[k])};
+function commitCut(){
+  if(slots.every(e=>e.value===''))return setSlots(PREFS.cut);   // inget angivet: behåll nuvarande
+  const d=slots.map(e=>e.value||'0');
+  let h=+(d[0]+d[1]),mi=+(d[2]+d[3]);
+  const bad=h>23||mi>59;h=Math.min(23,h);mi=Math.min(59,mi);
+  const c=h*60+mi;setSlots(c);cutEl.classList.toggle('bad',bad);
+  if(c!==PREFS.cut){PREFS.cut=c;savePrefs();timeChanged();noteSaved()}
+}
+setSlots(PREFS.cut);
+slots.forEach((e,k)=>{
+  e.addEventListener('focus',()=>{cutEl.classList.remove('bad');try{e.select()}catch(x){}setTimeout(()=>{try{e.select()}catch(x){}},0)});
+  e.addEventListener('input',ev=>{
+    const nw=ev&&typeof ev.data==='string'?ev.data.replace(/\D/g,''):'';   // det tecken som just skrevs (annars sista siffran)
+    const dg=(nw||e.value.replace(/\D/g,'')).slice(-1);e.value=dg;cutEl.classList.remove('bad');
+    if(dg==='')return;
+    if(k===0&&+dg>2){slots[0].value='0';slots[1].value=dg;slots[2].focus();return}   // "4" blir 04
+    if(k===1&&slots[0].value==='2'&&+dg>3)e.value='3';
+    if(k===2&&+dg>5){slots[2].value='0';slots[3].value=dg;slots[3].focus();return}
+    if(k<3)slots[k+1].focus();else e.blur();
+  });
+  e.addEventListener('keydown',ev=>{
+    if(ev.key==='Backspace'&&e.value===''&&k>0){ev.preventDefault();slots[k-1].value='';slots[k-1].focus()}
+    else if(ev.key==='ArrowLeft'&&k>0){ev.preventDefault();slots[k-1].focus()}
+    else if(ev.key==='ArrowRight'&&k<3){ev.preventDefault();slots[k+1].focus()}
+    else if(ev.key==='Enter'){ev.preventDefault();e.blur()}
+  });
+});
+cutEl.addEventListener('focusout',ev=>{if(!cutEl.contains(ev.relatedTarget))commitCut()});
+
+// Tidszon: egen listruta i appens stil (sökbar), ingen inbyggd rullgardin
+const devTz=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){return ''}})();
+const tzName=z=>z.replace(/_/g,' ');
+function tzZones(){
+  let zones=[];try{zones=Intl.supportedValuesOf('timeZone')}catch(e){}
+  if(!zones.length)zones=['Europe/Stockholm','Europe/London','Europe/Helsinki','Europe/Berlin','Europe/Lisbon','America/New_York','America/Chicago','America/Denver','America/Los_Angeles','Asia/Tokyo','Asia/Dubai','Australia/Sydney','Pacific/Auckland','UTC'];
+  zones=zones.slice();[devTz,PREFS.tz].forEach(z=>{if(z&&!zones.includes(z))zones.push(z)});
+  return zones;
+}
+// Kort namn = sista delen ("Asia/Kolkata" -> "Kolkata"); finns samma slutnamn flera gånger tas även delen före med
+const TZALIAS={'Asia/Calcutta':'Kolkata','Asia/Katmandu':'Kathmandu','Asia/Rangoon':'Yangon','Asia/Saigon':'Ho Chi Minh','Europe/Kiev':'Kyiv','Asia/Ulan_Bator':'Ulaanbaatar','America/Godthab':'Nuuk','Atlantic/Faeroe':'Faroe','Pacific/Truk':'Chuuk','Pacific/Ponape':'Pohnpei','America/Buenos_Aires':'Buenos Aires','America/Cordoba':'Córdoba'};
+// Svenska sökord: land/ort per sista delen av zonnamnet, och världsdel per första delen
+const KWC={stockholm:'sverige',oslo:'norge',copenhagen:'danmark köpenhamn',helsinki:'finland',reykjavik:'island',tallinn:'estland',riga:'lettland',vilnius:'litauen',berlin:'tyskland',paris:'frankrike',madrid:'spanien',lisbon:'portugal',rome:'italien vatikanen',athens:'grekland aten',istanbul:'turkiet',moscow:'ryssland moskva',kyiv:'ukraina kiev',kiev:'ukraina',warsaw:'polen warszawa',prague:'tjeckien prag',vienna:'österrike wien',budapest:'ungern',zurich:'schweiz',amsterdam:'nederländerna holland',brussels:'belgien bryssel',dublin:'irland',london:'storbritannien england',bucharest:'rumänien',sofia:'bulgarien',belgrade:'serbien',zagreb:'kroatien',minsk:'vitryssland belarus',luxembourg:'luxemburg',malta:'malta',tokyo:'japan',seoul:'sydkorea',pyongyang:'nordkorea',shanghai:'kina',hong_kong:'hongkong kina',macau:'macao kina',singapore:'singapore',bangkok:'thailand',jakarta:'indonesien',manila:'filippinerna',kolkata:'indien',calcutta:'indien',karachi:'pakistan',dhaka:'bangladesh',kathmandu:'nepal',katmandu:'nepal',colombo:'sri lanka',dubai:'förenade arabemiraten uae',riyadh:'saudiarabien',tehran:'iran',baghdad:'irak',jerusalem:'israel',beirut:'libanon',amman:'jordanien',damascus:'syrien',tashkent:'uzbekistan',almaty:'kazakstan',kabul:'afghanistan',yangon:'myanmar burma',rangoon:'myanmar burma',ho_chi_minh:'vietnam',saigon:'vietnam',taipei:'taiwan',kuala_lumpur:'malaysia',ulaanbaatar:'mongoliet',ulan_bator:'mongoliet',maldives:'maldiverna',cairo:'egypten',johannesburg:'sydafrika',lagos:'nigeria',nairobi:'kenya',casablanca:'marocko',algiers:'algeriet',tunis:'tunisien',addis_ababa:'etiopien',accra:'ghana',dar_es_salaam:'tanzania',kinshasa:'kongo',new_york:'usa',chicago:'usa',denver:'usa',los_angeles:'usa kalifornien',anchorage:'usa alaska',honolulu:'usa hawaii',phoenix:'usa',toronto:'kanada',vancouver:'kanada',mexico_city:'mexiko',havana:'kuba',bogota:'colombia',lima:'peru',santiago:'chile',buenos_aires:'argentina',cordoba:'argentina',sao_paulo:'brasilien',caracas:'venezuela',panama:'panama',jamaica:'jamaica',nuuk:'grönland',godthab:'grönland',sydney:'australien',melbourne:'australien',perth:'australien',brisbane:'australien',auckland:'nya zeeland',fiji:'fiji',tahiti:'franska polynesien',canary:'kanarieöarna spanien',azores:'azorerna portugal',madeira:'portugal',faroe:'färöarna',faeroe:'färöarna',mauritius:'mauritius',reunion:'réunion frankrike',utc:'utc gmt universell tid'};
+const KWR={Africa:'afrika',America:'amerika nordamerika sydamerika',Antarctica:'antarktis',Arctic:'arktis',Asia:'asien',Atlantic:'atlanten',Australia:'australien oceanien',Europe:'europa',Indian:'indiska oceanen',Pacific:'stilla havet oceanien'};
+const nrm=t=>String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+const tzFull=z=>{const a=TZALIAS[z];if(!a)return tzName(z);const p=z.split('/');p[p.length-1]=a;return p.join('/')};
+let tzShortMap=null;
+function tzShort(z){
+  if(!tzShortMap){
+    tzShortMap={};const zs=tzZones(),cnt={};
+    zs.forEach(x=>{const l=x.split('/').pop();cnt[l]=(cnt[l]||0)+1});
+    zs.forEach(x=>{const p=x.split('/');tzShortMap[x]=TZALIAS[x]||tzName(cnt[p[p.length-1]]>1&&p.length>1?p.slice(-2).join('/'):p[p.length-1])});
+  }
+  return tzShortMap[z]||tzName(z.split('/').pop());
+}
+let tzItems=null;
+function tzBuild(){
+  if(tzItems)return tzItems;
+  const now=new Date();
+  const off=z=>{try{const p=new Intl.DateTimeFormat('en-GB',{timeZone:z,timeZoneName:'longOffset'}).formatToParts(now).find(x=>x.type==='timeZoneName');const v=p?p.value.replace('GMT',''):'';return 'UTC'+(v||'+00:00')}catch(e){return ''}};
+  tzItems=tzZones().sort().map(z=>{const o=off(z),pp=z.split('/');return{z,name:tzFull(z),off:o,g:z.includes('/')?pp[0].replace(/_/g,' '):'Övrigt',key:nrm(tzName(z)+' '+tzFull(z)+' '+tzShort(z)+' '+(KWC[pp[pp.length-1].toLowerCase()]||'')+' '+(KWR[pp[0]]||'')+' '+o)}});
+  return tzItems;
+}
+function tzRender(q){
+  const L=$('tzl');L.textContent='';const tk=nrm(q||'').split(/\s+/).filter(Boolean);
+  const mk=(z,name,off)=>{const b=document.createElement('button');b.type='button';b.className='tzi';b.dataset.z=z;b.setAttribute('role','option');b.setAttribute('aria-selected',String(z===PREFS.tz));
+    const n=document.createElement('span');n.textContent=name;b.appendChild(n);if(off){const o=document.createElement('small');o.textContent=off;b.appendChild(o)}return b};
+  let any=false;
+  if(tk.every(t=>'automatisk enhetens tidszon'.includes(t))){L.appendChild(mk('','Automatisk'+(devTz?' ('+tzFull(devTz)+')':''),''));any=true}
+  let g=null;
+  tzBuild().forEach(it=>{
+    if(!tk.every(t=>it.key.includes(t)))return;
+    if(it.g!==g){g=it.g;const h=document.createElement('div');h.className='tzg';h.textContent=g;L.appendChild(h)}
+    L.appendChild(mk(it.z,it.name,it.off));any=true;
+  });
+  if(!any){const n=document.createElement('div');n.className='tzn';n.textContent='Ingen träff';L.appendChild(n)}
+}
+function tzShow(){$('tz').value=PREFS.tz?tzShort(PREFS.tz):'Automatisk'}
+tzShow();
+const ov5=$('ov5');let lastF5=null;
+function tzOpen(){lastF5=document.activeElement;tzReset();$('tzq').value='';tzRender('');ov5.hidden=false;
+  const sel=$('tzl').querySelector('[aria-selected="true"]');if(sel)$('tzl').scrollTop=Math.max(0,sel.offsetTop-$('tzl').clientHeight/2+22);$('ov5close').focus()}
+function tzReset(){const pop=ov5.querySelector('.pop');pop.style.transition='';pop.style.transform='';ov5.style.background=''}
+function tzClose(){tzReset();ov5.hidden=true;if(lastF5&&lastF5.focus)lastF5.focus()}
+$('tz').addEventListener('click',tzOpen);
+// Dra neråt när listan ligger i överkanten, eller uppåt när den ligger i nederkanten: rutan följer med fingret
+// och släpps den tillräckligt långt (eller med fart) glider den ut åt samma håll
+(function(){
+  const pop=ov5.querySelector('.pop'),L=$('tzl');
+  let on=false,drag=false,dir=1,aD=0,aU=0,anchor=0,cur=0,vel=0,ly=0,lt=0;
+  pop.addEventListener('touchstart',e=>{
+    on=e.touches.length===1;drag=false;cur=0;vel=0;if(!on)return;
+    aD=aU=ly=e.touches[0].clientY;lt=performance.now();pop.style.transition='none';
+  },{passive:true});
+  pop.addEventListener('touchmove',e=>{
+    if(!on)return;
+    const y=e.touches[0].clientY,now=performance.now();
+    if(now>lt)vel=dir*(y-ly)/(now-lt);ly=y;lt=now;
+    if(!drag){
+      const inL=L.contains(e.target);
+      const top=!inL||L.scrollTop<=0, bot=inL&&L.scrollTop+L.clientHeight>=L.scrollHeight-1;
+      if(top){if(y<aD)aD=y}else aD=y;
+      if(bot){if(y>aU)aU=y}else aU=y;
+      if(top&&y-aD>=4){drag=true;dir=1;anchor=aD}
+      else if(bot&&aU-y>=4){drag=true;dir=-1;anchor=aU}
+      if(!drag)return;
+      vel=0;
+    }
+    cur=Math.max(0,dir*(y-anchor));
+    if(e.cancelable)e.preventDefault();
+    pop.style.transform='translateY('+(dir*cur)+'px)';
+    ov5.style.background='rgba(0,0,0,'+(.55*(1-Math.min(1,cur/500)))+')';
+  },{passive:false});
+  const end=()=>{
+    if(!on)return;on=false;if(!drag)return;drag=false;
+    if(cur>110||(vel>.35&&cur>40)){
+      pop.style.transition='transform .22s ease-in';pop.style.transform='translateY('+(dir*window.innerHeight)+'px)';ov5.style.transition='background .22s';ov5.style.background='rgba(0,0,0,0)';
+      setTimeout(()=>{ov5.style.transition='';tzClose()},230);
+    }else{
+      pop.style.transition='transform .2s ease-out';pop.style.transform='';ov5.style.background='';
+      setTimeout(()=>{pop.style.transition=''},210);
+    }
+  };
+  pop.addEventListener('touchend',end,{passive:true});
+  pop.addEventListener('touchcancel',end,{passive:true});
+})();
+$('ov5close').onclick=tzClose;
+ov5.addEventListener('click',e=>{if(e.target===ov5)tzClose()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ov5.hidden){e.stopImmediatePropagation();tzClose()}});
+$('tzq').addEventListener('input',()=>tzRender($('tzq').value));
+$('tzl').addEventListener('click',e=>{
+  const b=e.target.closest('.tzi');if(!b)return;
+  const v=b.dataset.z;if(v&&!validTz(v))return;
+  tzClose();
+  if(v!==PREFS.tz){PREFS.tz=v;savePrefs();tzShow();timeChanged();noteSaved()}
+});
 
 (function(){
   const q=BAL/SCALE*50;
@@ -754,10 +1006,26 @@ ov2.addEventListener('click',e=>{if(e.target===ov2)closeQ()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ov2.hidden)closeQ()});
 const ov4=$('ov4');let lastF4=null;
 $('gear').onclick=()=>{lastF4=document.activeElement;ov4.hidden=false;$('ov4close').focus()};
+// När tangentbordet fälls upp: flytta fältet till synligt läge (och lämna plats under innehållet så att det går att rulla dit)
+(function(){
+  const pop=ov4.querySelector('.pop'),vv=window.visualViewport;
+  function fit(){
+    const a=document.activeElement;
+    if(ov4.hidden||!a||!pop.contains(a)||a.tagName!=='INPUT'||a.readOnly){pop.style.removeProperty('--kb');return}
+    const k=vv?Math.max(0,Math.round(window.innerHeight-vv.height-vv.offsetTop)):0;
+    if(k>0)pop.style.setProperty('--kb',k+'px');else pop.style.removeProperty('--kb');
+    const t=a.closest('.tm')||a;
+    try{t.scrollIntoView({block:'center',behavior:'smooth'})}catch(e){t.scrollIntoView()}
+  }
+  ov4.addEventListener('focusin',()=>{[60,300,700].forEach(ms=>setTimeout(fit,ms))});
+  ov4.addEventListener('focusout',()=>setTimeout(fit,120));
+  if(vv)vv.addEventListener('resize',()=>{if(!ov4.hidden)fit()});
+  window.addEventListener('resize',()=>{if(!ov4.hidden)fit()});
+})();
 function closeSet(){ov4.hidden=true;if(lastF4&&lastF4.focus)lastF4.focus()}
 $('ov4close').onclick=closeSet;
 ov4.addEventListener('click',e=>{if(e.target===ov4)closeSet()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ov4.hidden)closeSet()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ov4.hidden&&ov5.hidden&&ov3.hidden)closeSet()});   // Esc stänger bara översta rutan
 const ov3=$('ov3');let cm=null,lastF3=null,cc=null;
 $('cprev').innerHTML=CHV.l.replace('width="12" height="26"','width="9" height="20"');
 $('cnext').innerHTML=CHV.r.replace('width="12" height="26"','width="9" height="20"');
@@ -830,8 +1098,8 @@ try{if(window.claude&&claude.use)claude.use('downloads').then(x=>{dl=x||null;sho
 function showLast(){
   const e=$('xlast');if(!e)return;
   const at=st.lastExportAt?new Date(st.lastExportAt):null,ok=at&&!isNaN(at);
-  const dstr=d=>d.toLocaleDateString('sv-SE',{day:'numeric',month:'long',year:'numeric'});
-  e.textContent=ok?'Senast exporterad: '+dstr(at)+' kl. '+at.toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'}):(st.lastExport?'Senast exporterad: '+dstr(parse(st.lastExport)):'');
+  const dstr=(d,z)=>d.toLocaleDateString('sv-SE',Object.assign({day:'numeric',month:'long',year:'numeric'},z?tzOpt():{}));
+  e.textContent=ok?'Senast exporterad: '+dstr(at,true)+' kl. '+fmtHM(at.getTime()):(st.lastExport?'Senast exporterad: '+dstr(parse(st.lastExport)):'');
   e.hidden=!(ok||st.lastExport);
 }
 function markExported(){st.lastExport=curToday;st.lastExportAt=Date.now();save();showLast()}
@@ -893,7 +1161,7 @@ $('exp').onclick=async()=>{
     const a=document.createElement('a');a.href=URL.createObjectURL(file);a.download=fn;document.body.appendChild(a);a.click();
     setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);
     markExported();
-  }catch(e){xmsg.textContent=e&&(e.name==='AbortError'||e.code==='declined')?'Sparandet avbröts.':'Det gick inte att spara filen.'}
+  }catch(e){xmsg.textContent=e&&(e.name==='AbortError'||e.code==='declined')?'':'Det gick inte att spara filen.'}
 };
 $('imp').addEventListener('click',()=>{xmsg.textContent='';xf.value=''});
 $('imp').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();xf.click()}});
@@ -994,7 +1262,7 @@ $('ver').textContent='v'+APP_VERSION;
 uload();
 init();
 drawTools();
-if(umeta.act&&Date.now()-umeta.act<LITMS)lit(Date.now()-umeta.act);   // fortsätt förloppet där det var om sidan laddats om
+{const la=Math.max(umeta.act||0,umeta.sact||0);if(la&&Date.now()-la<LITMS)lit(Date.now()-la)}   // fortsätt förloppet där det var om sidan laddats om
 </script>
 </body>
 </html>
